@@ -1,0 +1,16 @@
+C:\Users\Usuario\Desktop\SBI\TestsLucas\bin\Debug\net5.0\TestsLucas.exe
+C:\Users\Usuario\Desktop\SBI\TestsLucas\bin\Debug\net5.0\TestsLucas.deps.json
+C:\Users\Usuario\Desktop\SBI\TestsLucas\bin\Debug\net5.0\TestsLucas.runtimeconfig.json
+C:\Users\Usuario\Desktop\SBI\TestsLucas\bin\Debug\net5.0\TestsLucas.runtimeconfig.dev.json
+C:\Users\Usuario\Desktop\SBI\TestsLucas\bin\Debug\net5.0\TestsLucas.dll
+C:\Users\Usuario\Desktop\SBI\TestsLucas\bin\Debug\net5.0\ref\TestsLucas.dll
+C:\Users\Usuario\Desktop\SBI\TestsLucas\bin\Debug\net5.0\TestsLucas.pdb
+C:\Users\Usuario\Desktop\SBI\TestsLucas\obj\Debug\net5.0\TestsLucas.csprojAssemblyReference.cache
+C:\Users\Usuario\Desktop\SBI\TestsLucas\obj\Debug\net5.0\TestsLucas.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Usuario\Desktop\SBI\TestsLucas\obj\Debug\net5.0\TestsLucas.AssemblyInfoInputs.cache
+C:\Users\Usuario\Desktop\SBI\TestsLucas\obj\Debug\net5.0\TestsLucas.AssemblyInfo.cs
+C:\Users\Usuario\Desktop\SBI\TestsLucas\obj\Debug\net5.0\TestsLucas.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\Desktop\SBI\TestsLucas\obj\Debug\net5.0\TestsLucas.dll
+C:\Users\Usuario\Desktop\SBI\TestsLucas\obj\Debug\net5.0\ref\TestsLucas.dll
+C:\Users\Usuario\Desktop\SBI\TestsLucas\obj\Debug\net5.0\TestsLucas.pdb
+C:\Users\Usuario\Desktop\SBI\TestsLucas\obj\Debug\net5.0\TestsLucas.genruntimeconfig.cache
