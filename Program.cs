@@ -10,74 +10,78 @@ namespace TestsLucas
     {
         static void Main(string[] args)
         {
-            DogConsoleWriter.Line(new Dog
+            Type t = typeof(Dog);
+            // Get the public properties.
+            PropertyInfo[] propInfos = t.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            Console.WriteLine("The number of public properties: {0}.\n",
+                              propInfos.Length);
+            // Display the public properties.
+            DisplayPropertyInfo(propInfos);
+
+            // Get the nonpublic properties.
+            PropertyInfo[] propInfos1 = t.GetProperties(BindingFlags.NonPublic | BindingFlags.Instance);
+            Console.WriteLine("The number of non-public properties: {0}.\n",
+                              propInfos1.Length);
+            // Display all the nonpublic properties.
+            DisplayPropertyInfo(propInfos1);
+        }
+        public static void DisplayPropertyInfo(PropertyInfo[] propInfos)
+        {
+            // Display information for all properties.
+            foreach (var propInfo in propInfos)
             {
-                Name = "Astro",
-                Breed = "Newfoundland"
-            });
+                bool readable = propInfo.CanRead;
+                bool writable = propInfo.CanWrite;
+
+                Console.WriteLine("   Property name: {0}", propInfo.Name);
+                Console.WriteLine("   Property type: {0}", propInfo.PropertyType);
+                Console.WriteLine("   Read-Write:    {0}", readable & writable);
+                if (readable)
+                {
+                    MethodInfo getAccessor = propInfo.GetMethod;
+                    Console.WriteLine("   Visibility:    {0}",
+                                      GetVisibility(getAccessor));
+                }
+                if (writable)
+                {
+                    MethodInfo setAccessor = propInfo.SetMethod;
+                    Console.WriteLine("   Visibility:    {0}",
+                                      GetVisibility(setAccessor));
+                }
+                Console.WriteLine();
+            }
+        }
+        public static String GetVisibility(MethodInfo accessor)
+        {
+            if (accessor.IsPublic)
+                return "Public";
+            else if (accessor.IsPrivate)
+                return "Private";
+            else if (accessor.IsFamily)
+                return "Protected";
+            else if (accessor.IsAssembly)
+                return "Internal/Friend";
+            else
+                return "Protected Internal/Friend";
         }
     }
 
     class Dog
     {
-        [Color(ConsoleColor.Red)]
         public string Name { get; set; }
-        [Color]
         public string Breed { get; set; }
-        [Color(ConsoleColor.Yellow)]
+        [ExcludeToHash()]
         public int Age { get; set; }
 
-        public 
-    }
-    static class DogConsoleWriter
-    {
-        public static void Line(Dog dog)
+        public void ToHash()
         {
-            var defaultColor = Console.ForegroundColor;
-            Console.Write("Name: ");
-            // Here the console foreground is set to either the attribute color or a default color
-            Console.ForegroundColor = GetPropertyColor(nameof(Dog.Name)) ?? defaultColor; ;
-            Console.Write(dog.Name);
-            Console.ForegroundColor = defaultColor;
-            Console.WriteLine();
 
-            Console.Write("Breed: ");
-            Console.ForegroundColor = GetPropertyColor(nameof(Dog.Breed)) ?? defaultColor;
-            Console.Write(dog.Breed);
-            Console.ForegroundColor = defaultColor;
-            Console.WriteLine();
-
-            Console.Write("Age: ");
-            Console.ForegroundColor = GetPropertyColor(nameof(Dog.Age)) ?? defaultColor;
-            Console.Write(dog.Age);
-            Console.ForegroundColor = defaultColor;
-            Console.WriteLine();
-        }
-
-        // Here is the most important part
-        private static ConsoleColor? GetPropertyColor(string propertyName)
-        {
-            // This uses C#'s reflection to get the attribute if one exists
-            PropertyInfo propertyInfo = typeof(Dog).GetProperty(propertyName);
-            ColorAttribute colorAttribute = (ColorAttribute)Attribute.GetCustomAttribute(propertyInfo, typeof(ColorAttribute));
-
-            // If colorAttribute is not null, than a color attribute exists
-            if (colorAttribute != null)
-            {
-                return colorAttribute.Color;
-            }
-            return null;
         }
     }
 
-    [System.AttributeUsage(AttributeTargets.Property, Inherited = true, AllowMultiple = true)]
-    sealed class ColorAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Property, Inherited = true, AllowMultiple = true)]
+    sealed class ExcludeToHashAttribute : Attribute
     {
-        public ColorAttribute(ConsoleColor color = ConsoleColor.Cyan)
-        {
-            Color = color;
-        }
-
-        public ConsoleColor Color { get; }
+        public ExcludeToHashAttribute() { }
     }
 }
